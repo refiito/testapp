@@ -13,7 +13,12 @@ CREATE TABLE IF NOT EXISTS users(
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE UNIQUE INDEX index_user_email_unique ON users USING btree(email);`
+DO $$
+BEGIN
+  IF to_regclass('public.index_user_email_unique') IS NULL THEN
+    CREATE UNIQUE INDEX index_user_email_unique ON users USING btree(email);
+  END IF;
+END$$;`
 
 var insertUser = `INSERT INTO users (email, password) VALUES ($1, $2)`
 var selectUser = `SELECT user_id, email, password FROM users WHERE lower(email) = lower($1)`
