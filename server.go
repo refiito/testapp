@@ -16,7 +16,7 @@ type Answer struct {
 var emailRegex = regexp.MustCompile(`^[^<>\\#$@\s]+@[^<>\\#$@\s]*[^<>\\#$\.\s@]{1}?\.{1}?[^<>\\#$\.@\s]{1}?[^<>\\#$@\s]+$`)
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	u := &Answer{Message: "", Email: "E-mail address"}
+	u := &Answer{Message: "", Email: ""}
 	renderTemplate(w, "index", u)
 }
 
@@ -57,7 +57,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	err2 := user.authenticate(password)
-	if err != nil {
+	if err2 != nil {
 		u.Message = err2.Error()
 	}
 	renderTemplate(w, "index_result", u)

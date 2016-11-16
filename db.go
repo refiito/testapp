@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"errors"
 	"github.com/jameskeane/bcrypt"
 )
@@ -63,6 +64,9 @@ func createUser(email, password string) (err error) {
 
 func getUser(email string) (usr User, err error) {
 	err = config.DB.Get(&usr, selectUser, email)
+	if err == sql.ErrNoRows {
+		err = nil
+	}
 	return
 }
 
