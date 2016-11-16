@@ -8,7 +8,7 @@ import (
 	"regexp"
 )
 
-type User struct {
+type Answer struct {
 	Email   string
 	Message string
 }
@@ -16,7 +16,7 @@ type User struct {
 var emailRegex = regexp.MustCompile(`^[^<>\\#$@\s]+@[^<>\\#$@\s]*[^<>\\#$\.\s@]{1}?\.{1}?[^<>\\#$\.@\s]{1}?[^<>\\#$@\s]+$`)
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	u := &User{Message: "", Email: "E-mail address"}
+	u := &Answer{Message: "", Email: "E-mail address"}
 	renderTemplate(w, "index", u)
 }
 
@@ -28,7 +28,7 @@ func signupHandler(w http.ResponseWriter, r *http.Request) {
 		message = fmt.Sprintf("Invalid e-mail: '%s'", email)
 	}
 
-	u := &User{
+	u := &Answer{
 		Email:   email,
 		Message: message,
 	}
@@ -38,13 +38,13 @@ func signupHandler(w http.ResponseWriter, r *http.Request) {
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	// email := r.FormValue("email")
 	// password := r.FormValue("password")
-	u := &User{Email: "foo"}
+	u := &Answer{Email: "foo"}
 	renderTemplate(w, "index_result", u)
 }
 
 var templates = template.Must(template.ParseFiles("index.html", "index_result.html"))
 
-func renderTemplate(w http.ResponseWriter, tmpl string, u *User) {
+func renderTemplate(w http.ResponseWriter, tmpl string, u *Answer) {
 	err := templates.ExecuteTemplate(w, tmpl+".html", u)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
