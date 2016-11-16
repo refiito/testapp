@@ -1,0 +1,22 @@
+<h1>Hello!</h1>
+
+<h2>{{.Message}}</h2>
+
+<h3>Sign-up</h3>
+<form action="/signup" method="POST">
+  <div>
+    <input type="text" name="email" placeholder="E-mail address">
+  </div>
+  <div><input type="submit" value="Sign up"></div>
+</form>
+
+<h3>Or log in</h3>
+<form action="/login" method="POST">
+  <div>
+    <input type="text" name="email" value="{{.Email}}" placeholder="E-mail address">
+  </div>
+  <div>
+    <input type="password" name="password" placeholder="Password">
+  </div>
+  <div><input type="submit" value="Log in"></div>
+</form>
