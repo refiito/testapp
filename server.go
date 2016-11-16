@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 	"regexp"
-  "log"
 )
 
 type User struct {
@@ -52,8 +52,9 @@ func renderTemplate(w http.ResponseWriter, tmpl string, u *User) {
 }
 
 func main() {
-  configure()
-  
+	configure()
+	runDBCheck()
+
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/signup", signupHandler)
 	http.HandleFunc("/login", loginHandler)

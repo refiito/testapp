@@ -10,7 +10,7 @@ import (
 var config *Config
 
 type Config struct {
-	dbConnURL string
+	dbConnURL  string
 	listenAddr string
 
 	DB *sqlx.DB
@@ -26,7 +26,7 @@ func configure() {
 	db.SetMaxIdleConns(1)
 	db.SetMaxOpenConns(2)
 
-	config.DB = config.DB
+	config.DB = db
 }
 
 func getListenAddress() string {
